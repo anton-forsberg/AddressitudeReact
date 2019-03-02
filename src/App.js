@@ -1,26 +1,26 @@
-import React, { Component } from 'react';
-import logo from './logo.svg';
-import './App.css';
+import React, { Component, lazy, Suspense } from 'react';
+import { Route, Redirect, withRouter, Switch } from 'react-router-dom';
+import { library } from '@fortawesome/fontawesome-svg-core'
+import { faMobileAlt, faPhone, faEnvelope, faAngleRight, faAngleLeft,
+  faTag, faSortAlphaDown, faSortAlphaUp, faMapMarkerAlt, faQuestionCircle } from '@fortawesome/free-solid-svg-icons';
+import './styles.scss';
+
+library.add(faMobileAlt, faPhone, faEnvelope, faAngleRight, faAngleLeft,
+  faTag, faSortAlphaDown, faSortAlphaUp, faMapMarkerAlt, faQuestionCircle);
+
+const Contacts = withRouter(
+  lazy(() => import('./contacts/Contacts'))
+);
 
 class App extends Component {
   render() {
     return (
-      <div className="App">
-        <header className="App-header">
-          <img src={logo} className="App-logo" alt="logo" />
-          <p>
-            Edit <code>src/App.js</code> and save to reload.
-          </p>
-          <a
-            className="App-link"
-            href="https://reactjs.org"
-            target="_blank"
-            rel="noopener noreferrer"
-          >
-            Learn React
-          </a>
-        </header>
-      </div>
+      <Suspense fallback={<div>Loading...</div>}>
+        <Switch>
+          <Redirect from="/" exact to="/contacts" />
+          <Route path='/contacts' component={Contacts}></Route>
+        </Switch>
+      </Suspense>
     );
   }
 }

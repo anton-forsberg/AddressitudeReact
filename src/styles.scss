@@ -1,0 +1,65 @@
+@import url('https://fonts.googleapis.com/css?family=Ubuntu');
+
+$bg: #141414;
+$panel-bg: #212121;
+$panel-bg-hover: #2d2d2d;
+$highlight-bg: #c8ffc0;
+$highlight-color: $panel-bg;
+$highlight-bg-hover: #defdda;
+
+body {
+    font-family: 'Ubuntu', sans-serif;
+    background-color: $bg;
+    color: #ffffff;
+    margin: 0;
+    overflow: auto;
+    height: 100%;
+}
+
+mark {
+    background-color: $highlight-bg;
+    color: $highlight-color;
+}
+
+.layout {
+    display: flex;
+    align-items: flex-start;
+
+    &.row {
+        flex-direction: row;
+    }
+
+    &.column {
+        flex-direction: column;
+    }
+}
+
+.flex {
+    flex: 1 1 auto;
+}
+
+.mail-icon {
+    color: #ffff81;
+}
+
+.location-icon {
+    color: #ff6c6c;
+}
+
+.phone-icon {
+    color: #9dff9d;
+}
+
+.mobile-icon {
+    color: #33b2ff;
+}
+
+.question-icon {
+    color: #f6a8fb;
+}
+
+@media all and (max-width: 736px) {
+    .layout.column-lt-xs {
+        flex-direction: column;
+    }
+}

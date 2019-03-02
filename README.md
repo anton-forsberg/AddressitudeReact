@@ -1,3 +1,19 @@
+# Addressitude-react
+
+## Command history
+* npx create-react-app addressitude-react
+* cd addressitude-react
+* npm install react-router-dom
+* npm install axios
+* npm install moment
+* npm install randomColor
+* npm install redux react-redux
+* npm install redux-saga
+* npm install node-sass
+* npm install @fortawesome/fontawesome-svg-core
+* npm install @fortawesome/free-solid-svg-icons
+* npm install @fortawesome/react-fontawesome
+
 This project was bootstrapped with [Create React App](https://github.com/facebook/create-react-app).
 
 ## Available Scripts

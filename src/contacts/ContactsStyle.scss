@@ -1,0 +1,221 @@
+@import "../styles.scss";
+
+.contact-details {
+    margin: 10px;
+
+    .information-header {
+        font-weight: bold;
+        display: block;
+    }
+
+    .back-link {
+        padding: 12px 40px;
+        font-size: 20px;
+        width: 100%;
+        background-color: $panel-bg;
+        border-radius: 24px;
+        display: block;
+        margin-bottom: 10px;
+    
+        &:hover {
+            background-color: $panel-bg-hover;
+        }
+    }
+
+    .contact {
+        background-color: $panel-bg;
+        border-radius: 94px;
+        padding: 20px;
+        line-height: 1.4em;
+    
+        img {
+            border-radius: 50%;
+            border: 10px solid;
+            margin-right: 20px;
+            width: 148px;
+            height: 148px;
+        }
+        
+        h2 {
+            margin: 0;
+        }
+        
+        .information {
+            padding-right: 20px;
+        }
+    
+        p {
+            margin-bottom: 0;
+            word-break: break-word;
+        }
+    }
+
+    @media all and (max-width: 960px) {
+        font-size: 14px;
+    
+        .contact {
+            border-radius: 74px;
+    
+            h2 {
+                margin-top: 1em;
+            }
+
+            img {
+                border-width: 5px;
+                width: 108px;
+                height: 108px;
+            }
+        }
+    }
+}
+
+.contact-list {
+    ul {
+        list-style: none;
+        margin: 0;
+        padding: 0;
+    }
+    
+    ul.contacts {
+        padding-top: 96px;
+    
+        li {
+            background-color: $panel-bg;
+            margin: 10px;
+            border-radius: 100px;
+            transition: width 0.5s ease;
+            width: calc(100% - 20px);
+    
+            &:hover {
+                background-color: $panel-bg-hover;
+            }
+    
+            &.minimized {
+                width: 150px;
+            }
+        }
+    }
+    
+    ul.order-by {
+        display: flex;
+        align-items: center;
+        justify-content: center;
+    
+        li {
+            margin: 0px 5px;
+            padding: 5px 10px;
+            border-radius: 10px;
+            text-transform: capitalize;
+            background-color: $panel-bg;
+            cursor: pointer;
+            
+            &:hover {
+                background-color: $panel-bg-hover;
+            }
+    
+            &.active {
+                background-color: $highlight-bg;
+                color: $highlight-color;
+    
+                &:hover {
+                    background-color: $highlight-bg-hover;
+                }
+            }
+        }
+    }
+    
+    .search-field {
+        background-color: $panel-bg;
+        margin: 10px;
+        border-radius: 24px;
+    
+        &:hover {
+            background-color: $panel-bg-hover;
+        }
+    
+        input {
+            background-color: transparent;
+            border: none;
+            color: inherit;
+            width: 100%;
+            font-family: inherit;
+            padding: 12px 40px;
+            font-size: 20px;
+        }
+    }
+    
+    .top-section {
+        position: fixed;
+        z-index: 1;
+        top: 0;
+        max-width: 100%;
+        width: 960px;
+        background-color: $bg;
+        padding-bottom: 10px;
+    }
+    @media all and (max-width: 960px) {
+        ul.contacts {
+            li {
+                border-radius: 50px;
+            }
+        }
+    }
+}
+
+.contact-list-item {
+    padding: 20px;
+    display: flex;
+    align-items: center;
+
+    &:hover {
+        text-decoration: none;
+    }
+
+    fa-icon {
+        width: 26px;
+        padding-right: 10px;
+        display: inline-block;
+    }
+
+    h2, p {
+        margin-top: 0px;
+        margin-bottom: 5px;
+    }
+
+    p {
+        word-break: break-word;
+    }
+
+    img {
+        margin-right: 20px;
+        border-radius: 50%;
+        border: 5px solid;
+        width: 110px;
+        height: 110px;
+    }
+
+    .text {
+        flex: 1;
+    }
+
+    .email {
+        word-break: break-all;
+    }
+    
+    @media all and (max-width: 960px) {
+        align-items: flex-start;
+
+        h2 {
+            font-size: 16px;
+        }
+        p {
+            font-size: 14px;
+        }
+        img {
+            width: 50px;
+            height: 50px;
+            margin-right: 10px;
+            border-width: 3px;
+        }
+    }
+}
