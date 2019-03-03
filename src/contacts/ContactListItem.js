@@ -40,25 +40,25 @@ class ContactListItem extends PureComponent {
   }
 
   render() {
-    const { contact, highlightRegex, index } = this.props;
+    const { contact, highlight, index } = this.props;
 
     return (
       <Container className="contact-list-item" onClick={this.goToContactDetails} i={index + 1} pose={contact.expanded ? 'expanded' : 'minimized'}>
         <img src={contact.picture} style={{borderColor: contact.color, backgroundColor: contact.color}} alt=""></img>
         <Text className="text">
-          <h2><Highlight text={contact.name} regex={highlightRegex}/></h2>
+          <h2><Highlight text={contact.name} highlight={highlight}/></h2>
           <div className="layout row column-lt-xs">
             <div className="flex">
               <p className="email">
                 <a href={'mailto:' + contact.email} onClick={this.stopPropagation}>
                   <FontAwesomeIcon className="mail-icon" icon="envelope"/>
-                  <Highlight text={contact.email} regex={highlightRegex} />
+                  <Highlight text={contact.email} highlight={highlight} />
                 </a>
               </p>
               <p className="city">
                 <a href={contact.mapUrl} onClick={this.stopPropagation}>
                   <FontAwesomeIcon className="location-icon" icon="map-marker-alt"/>
-                  <Highlight text={contact.city} regex={highlightRegex} />
+                  <Highlight text={contact.city} highlight={highlight} />
                 </a>
               </p>
             </div>
@@ -66,13 +66,13 @@ class ContactListItem extends PureComponent {
               <p className="phone">
                 <a href={'tel:' + contact.phone} onClick={this.stopPropagation}>
                   <FontAwesomeIcon className="phone-icon" icon="phone"/>
-                  <Highlight text={contact.phone} regex={highlightRegex} />
+                  <Highlight text={contact.phone} highlight={highlight} />
                 </a>
               </p>
               <p className="mobile">
                 <a href={'tel:' + contact.cell} onClick={this.stopPropagation}>
                   <FontAwesomeIcon className="mobile-icon" icon="mobile-alt"/>
-                  <Highlight text={contact.cell} regex={highlightRegex} />
+                  <Highlight text={contact.cell} highlight={highlight} />
                 </a>
               </p>
             </div>

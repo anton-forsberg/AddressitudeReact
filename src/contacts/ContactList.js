@@ -17,10 +17,10 @@ class ContactList extends PureComponent {
     const { searchTerm } = this.props;
     if (!searchTerm) return true;
 
-    this.searchRegex = new RegExp(searchTerm, 'gi');
+    const regex = new RegExp(searchTerm, 'gi');
 
     for (const field of SearchFields) {
-      if (this.searchRegex.test(contact[field])) {
+      if (regex.test(contact[field])) {
         return true;
       }
     }
@@ -49,10 +49,10 @@ class ContactList extends PureComponent {
         {
           <ul className="contacts">
             {
-              contacts.filter(this.performSearch).sort(this.performOrder).map((contact, i) => {
+              contacts.sort(this.performOrder).map((contact, i) => {
                 return (
-                  <li key={contact.identifier}>
-                    <ContactListItem index={i} contact={contact} highlightRegex={this.searchRegex}/>
+                  <li key={contact.identifier} style={{ display: this.performSearch(contact) ? 'block': 'none' }}>
+                    <ContactListItem index={i} contact={contact} highlight={searchTerm}/>
                   </li>
                 )
               })

@@ -40,4 +40,4 @@ class OrderBy extends PureComponent {
   }
 }
 
-export default OrderBy
+export default OrderBy;

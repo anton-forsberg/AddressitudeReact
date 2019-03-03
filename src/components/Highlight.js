@@ -1,9 +1,9 @@
 import React from 'react'
 
-const Highlight = ({ text, regex }) => {
-    if (!regex) return ( <>{text}</> );
+const Highlight = ({ text, highlight }) => {
+    if (!highlight) return ( <span>{text}</span> );
 
-    const html = text.replace(regex, '<mark>$&</mark>')
+    const html = text.replace(new RegExp(highlight, 'gi'), '<mark>$&</mark>');
 
     return (
         <span dangerouslySetInnerHTML={{__html: html}}></span>

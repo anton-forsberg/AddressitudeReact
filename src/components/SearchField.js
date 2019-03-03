@@ -1,6 +1,6 @@
-import React, { Component } from 'react'
+import React, { PureComponent } from 'react'
 
-export default class SearchField extends Component {
+class SearchField extends PureComponent {
   render() {
     const { onSearch, placeholder,value } = this.props;
 
@@ -11,3 +11,5 @@ export default class SearchField extends Component {
     )
   }
 }
+
+export default SearchField;
