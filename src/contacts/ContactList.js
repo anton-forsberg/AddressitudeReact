@@ -2,17 +2,15 @@ import React, { PureComponent } from 'react';
 import SearchField from '../components/SearchField';
 import OrderBy from '../components/OrderBy';
 import ContactListItem from './ContactListItem';
-import { SearchFields } from '../store/config';
-import { connect } from 'react-redux';
-import { searchContactsAction, orderContactsAction } from '../store';
+import { SearchFields } from '../config';
 
 class ContactList extends PureComponent {  
   handleSearch = (searchTerm) => {
-    this.props.searchContacts(searchTerm);
+    this.props.handleSearch(searchTerm);
   }
 
   handleOrder = (field, reverse) => {
-    this.props.orderContacts(field, reverse);
+    this.props.handleOrderBy(field, reverse);
   }
 
   performSearch = (contact) => {
@@ -46,7 +44,7 @@ class ContactList extends PureComponent {
       <div className="contact-list">
         <section className="top-section">
           <SearchField value={searchTerm} placeholder="Search contacts..." onSearch={this.handleSearch}/>
-          <OrderBy field={orderByField} reverse={orderByReverse} onOrder={this.handleOrder}/>
+          <OrderBy orderByField={orderByField} orderByReverse={orderByReverse} onOrder={this.handleOrder}/>
         </section>
         {
           <ul className="contacts">
@@ -66,28 +64,4 @@ class ContactList extends PureComponent {
   }
 }
 
-const mapStateToProps = state => {
-  return {
-      searchTerm: state.contacts.searchTerm,
-      orderByField: state.contacts.orderBy.field,
-      orderByReverse: state.contacts.orderBy.reverse
-  }
-};
-
-const mapDispatchToProps = dispatch => {
-  return {
-      searchContacts: (searchTerm) => {
-          dispatch(searchContactsAction(searchTerm));
-      },
-      orderContacts: (orderByField, orderByReverse) => {
-        dispatch(orderContactsAction({ field: orderByField, reverse: orderByReverse }));
-      }
-  }
-};
-
-const ContactListContainer = connect(
-  mapStateToProps,
-  mapDispatchToProps
-)(ContactList);
-
-export default ContactListContainer;
+export default ContactList;

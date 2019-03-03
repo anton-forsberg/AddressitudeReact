@@ -4,6 +4,7 @@ import { library } from '@fortawesome/fontawesome-svg-core'
 import { faMobileAlt, faPhone, faEnvelope, faAngleRight, faAngleLeft,
   faTag, faSortAlphaDown, faSortAlphaUp, faMapMarkerAlt, faQuestionCircle } from '@fortawesome/free-solid-svg-icons';
 import './styles.scss';
+import Loader from './components/Loader';
 
 library.add(faMobileAlt, faPhone, faEnvelope, faAngleRight, faAngleLeft,
   faTag, faSortAlphaDown, faSortAlphaUp, faMapMarkerAlt, faQuestionCircle);
@@ -16,7 +17,7 @@ class App extends Component {
   render() {
     return (
       <section className="content">
-        <Suspense fallback={<div>Loading...</div>}>
+        <Suspense fallback={<div></div>}>
           <Switch>
             <Redirect from="/" exact to="/contacts" />
             <Route path='/contacts' component={Contacts}></Route>

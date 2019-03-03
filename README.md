@@ -14,6 +14,7 @@
 * npm install @fortawesome/free-solid-svg-icons
 * npm install @fortawesome/react-fontawesome
 * npm install react-pose
+* npm install gh-pages
 
 This project was bootstrapped with [Create React App](https://github.com/facebook/create-react-app).
 

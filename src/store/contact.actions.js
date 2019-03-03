@@ -7,11 +7,3 @@ export const ORDER_CONTACT = '[Contacts] ORDER_CONTACT';
 export const loadContactsAction = () => {
     return { type: LOAD_CONTACT }
 };
-
-export const searchContactsAction = (searchTerm) => {
-    return { payload: searchTerm, type: SEARCH_CONTACT }
-};
-
-export const orderContactsAction = (orderBy) => {
-    return { payload: orderBy, type: ORDER_CONTACT }
-};

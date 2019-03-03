@@ -1,30 +1,31 @@
-import React, { Component } from 'react'
-import { OrderByFields } from '../store/config';
+import React, { PureComponent } from 'react'
+import { OrderByFields } from '../config';
 import { FontAwesomeIcon } from '@fortawesome/react-fontawesome';
 
-export default class OrderBy extends Component {
+class OrderBy extends PureComponent {
   setOrder = field => {
+    const { orderByField, orderByReverse } = this.props;
+
     let reverse = false;
 
-    if (field === this.props.field) {
-      reverse = !this.props.reverse;
-    }
+    if (field === orderByField)
+      reverse = !orderByReverse;
 
     this.props.onOrder(field, reverse);
   }
 
   render() {
-    const { field, reverse } = this.props;
+    const { orderByField, orderByReverse } = this.props;
 
     return (
       <ul className="order-by">
       {
-        OrderByFields.map(orderByField => {
+        OrderByFields.map(field => {
           return (
-            <li key={orderByField} className={field === orderByField ? 'active' : ''} onClick={() => this.setOrder(orderByField)}>
-              {orderByField}&nbsp;
+            <li key={field} className={orderByField === field ? 'active' : ''} onClick={() => this.setOrder(field)}>
+              {field}&nbsp;
               {
-                field === orderByField && reverse ? (
+                orderByField === field && orderByReverse ? (
                   <FontAwesomeIcon icon="sort-alpha-up" />
                 ) : (
                   <FontAwesomeIcon icon="sort-alpha-down" />
@@ -38,3 +39,5 @@ export default class OrderBy extends Component {
     )
   }
 }
+
+export default OrderBy

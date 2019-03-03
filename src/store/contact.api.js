@@ -1,5 +1,5 @@
 import axios from 'axios';
-import { Api, ApiResults, ApiSeed } from './config';
+import { Api, ApiResults, ApiSeed } from '../config';
 import { parseList } from './action-utils';
 import { ContactModel } from './contact.model';
 
