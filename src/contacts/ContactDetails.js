@@ -25,7 +25,7 @@ class ContactDetails extends Component {
         {
           !!contact && 
           <div className="contact layout row column-lt-xs">
-            <img style={{borderColor: contact.color}} src={contact.picture} alt="" />
+            <img style={{borderColor: contact.color, backgroundColor: contact.color}} src={contact.picture} alt="" />
             <div className="flex">
               <h2>{contact.firstname} {contact.lastname}</h2>
               <div className="layout row column-lt-xs">

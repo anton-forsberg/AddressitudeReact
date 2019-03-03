@@ -1,32 +1,31 @@
-import React, { Component } from 'react';
-import SearchField from './SearchField';
+import React, { PureComponent } from 'react';
+import SearchField from '../components/SearchField';
 import OrderBy from '../components/OrderBy';
 import ContactListItem from './ContactListItem';
 import { SearchFields } from '../store/config';
 
-export default class ContactList extends Component {
+export default class ContactList extends PureComponent {
   state = {
     searchRegex: null,
     orderByField: 'name',
     orderByReverse: false
   }
-
   
-  onSearch = (searchTerm) => {
+  handleSearch = (searchTerm) => {
     const regex = searchTerm ? new RegExp(searchTerm, 'gi') : null;
     this.setState({
       searchRegex: regex
     });
   }
 
-  onOrder = (field, reverse) => {
+  handleOrder = (field, reverse) => {
     this.setState({
       orderByField: field,
       orderByReverse: reverse
     });
   }
 
-  doSearch = (contact) => {
+  performSearch = (contact) => {
     const { searchRegex } = this.state;
     if (!searchRegex) return true;
 
@@ -39,15 +38,12 @@ export default class ContactList extends Component {
     return false;
   }
 
-  doOrder = (a, b) => {
+  performOrder = (a, b) => {
     const { orderByField, orderByReverse } = this.state;
-
     if (!orderByField) return 0;
 
-    if (!orderByReverse)
-      return (a[orderByField] > b[orderByField]) ? 1 : ((b[orderByField] > a[orderByField]) ? -1 : 0);
-    else
-      return (a[orderByField] > b[orderByField]) ? -1 : ((b[orderByField] > a[orderByField]) ? 1 : 0);
+    const order = orderByReverse ? [-1,1] : [1,-1];
+    return (a[orderByField] > b[orderByField]) ? order[0] : ((b[orderByField] > a[orderByField]) ? order[1] : 0);
   }
 
 
@@ -58,16 +54,16 @@ export default class ContactList extends Component {
     return (
       <div className="contact-list">
         <section className="top-section">
-          <SearchField placeholder="Search contacts..." onSearch={this.onSearch}/>
-          <OrderBy field={orderByField} reverse={orderByReverse} onOrder={this.onOrder}/>
+          <SearchField placeholder="Search contacts..." onSearch={this.handleSearch}/>
+          <OrderBy field={orderByField} reverse={orderByReverse} onOrder={this.handleOrder}/>
         </section>
         {
-          <ul>
+          <ul className="contacts">
             {
-              contacts.filter(this.doSearch).sort(this.doOrder).map(contact => {
+              contacts.filter(this.performSearch).sort(this.performOrder).map((contact, i) => {
                 return (
                   <li key={contact.identifier}>
-                    <ContactListItem contact={contact} highlightRegex={searchRegex}/>
+                    <ContactListItem index={i} contact={contact} highlightRegex={searchRegex}/>
                   </li>
                 )
               })

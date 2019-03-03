@@ -1,10 +1,11 @@
 import React, { Component } from 'react'
 import { OrderByFields } from '../store/config';
+import { FontAwesomeIcon } from '@fortawesome/react-fontawesome';
 
 export default class OrderBy extends Component {
   setOrder = field => {
     let reverse = false;
-    
+
     if (field === this.props.field) {
       reverse = !this.props.reverse;
     }
@@ -21,8 +22,14 @@ export default class OrderBy extends Component {
         OrderByFields.map(orderByField => {
           return (
             <li key={orderByField} className={field === orderByField ? 'active' : ''} onClick={() => this.setOrder(orderByField)}>
-              {orderByField}
-              <i className={field === orderByField && reverse ? 'fas fa-sort-alpha-up' : 'fas fa-sort-alpha-down'}></i>
+              {orderByField}&nbsp;
+              {
+                field === orderByField && reverse ? (
+                  <FontAwesomeIcon icon="sort-alpha-up" />
+                ) : (
+                  <FontAwesomeIcon icon="sort-alpha-down" />
+                )
+              }
             </li>
           )
         })

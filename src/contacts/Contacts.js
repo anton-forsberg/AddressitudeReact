@@ -4,7 +4,7 @@ import ContactList from './ContactList';
 import ContactDetails from './ContactDetails';
 import { connect } from 'react-redux';
 import { loadContactsAction } from '../store';
-import './ContactsStyle.scss';
+import './Contacts.scss';
 
 class Contacts extends Component {
   componentDidMount() {
@@ -18,11 +18,11 @@ class Contacts extends Component {
       <>
         <Switch>
             <Route path="/contacts" exact component={() => (
-                <ContactList contacts={contacts} />
-            )}></Route>
+                <ContactList contacts={contacts}/>
+            )}/>
             <Route path="/contacts/:contactId" exact component={() => (
-                <ContactDetails contacts={contacts} />
-            )}></Route>
+                <ContactDetails contacts={contacts}/>
+            )}/>
         </Switch>
       </>
     )

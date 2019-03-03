@@ -15,12 +15,14 @@ const Contacts = withRouter(
 class App extends Component {
   render() {
     return (
-      <Suspense fallback={<div>Loading...</div>}>
-        <Switch>
-          <Redirect from="/" exact to="/contacts" />
-          <Route path='/contacts' component={Contacts}></Route>
-        </Switch>
-      </Suspense>
+      <section className="content">
+        <Suspense fallback={<div>Loading...</div>}>
+          <Switch>
+            <Redirect from="/" exact to="/contacts" />
+            <Route path='/contacts' component={Contacts}></Route>
+          </Switch>
+        </Suspense>
+      </section>
     );
   }
 }

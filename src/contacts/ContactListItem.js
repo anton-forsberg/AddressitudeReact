@@ -1,9 +1,36 @@
-import React, { Component } from 'react'
+import React, { PureComponent } from 'react'
 import Highlight from '../components/Highlight';
 import { FontAwesomeIcon } from '@fortawesome/react-fontawesome'
 import { withRouter } from 'react-router-dom';
+import posed from 'react-pose';
 
-class ContactListItem extends Component {
+const Container = posed.div({
+  expanded: { 
+    width: 'auto',
+    delayChildren: ({ i }) => ( 100 + (i * 100)),
+    transition: ({ i }) => ({ delay: i * 100 })
+  },
+  minimized: { width: '148px' },
+  props: { i : 0 }
+});
+
+const Text = posed.div({
+  expanded: { 
+    opacity: 1,
+    maxHeight: 'none'
+  },
+  minimized: {
+    opacity: 0
+   }
+})
+
+class ContactListItem extends PureComponent {
+  state = { expanded: false }
+
+  componentDidMount() {
+    this.setState({ expanded: true });
+  }
+
   stopPropagation = e => {
     e.stopPropagation();
   }
@@ -13,12 +40,13 @@ class ContactListItem extends Component {
   }
 
   render() {
-    const { contact, highlightRegex } = this.props;
+    const { expanded } = this.state;
+    const { contact, highlightRegex, index } = this.props;
 
     return (
-      <div className="contact-list-item" onClick={this.goToContactDetails}>
-        <img src={contact.picture} style={{borderColor: contact.color}} alt=""></img>
-        <div className="text">
+      <Container className="contact-list-item" onClick={this.goToContactDetails} i={index + 1} pose={expanded ? 'expanded' : 'minimized'}>
+        <img src={contact.picture} style={{borderColor: contact.color, backgroundColor: contact.color}} alt=""></img>
+        <Text className="text">
           <h2><Highlight text={contact.name} regex={highlightRegex}/></h2>
           <div className="layout row column-lt-xs">
             <div className="flex">
@@ -50,8 +78,8 @@ class ContactListItem extends Component {
               </p>
             </div>
           </div>
-        </div>
-      </div>
+        </Text>
+      </Container>
     )
   }
 }
