@@ -4,7 +4,6 @@ import { library } from '@fortawesome/fontawesome-svg-core'
 import { faMobileAlt, faPhone, faEnvelope, faAngleRight, faAngleLeft,
   faTag, faSortAlphaDown, faSortAlphaUp, faMapMarkerAlt, faQuestionCircle } from '@fortawesome/free-solid-svg-icons';
 import './styles.scss';
-import Loader from './components/Loader';
 
 library.add(faMobileAlt, faPhone, faEnvelope, faAngleRight, faAngleLeft,
   faTag, faSortAlphaDown, faSortAlphaUp, faMapMarkerAlt, faQuestionCircle);
