@@ -3,34 +3,26 @@ import SearchField from '../components/SearchField';
 import OrderBy from '../components/OrderBy';
 import ContactListItem from './ContactListItem';
 import { SearchFields } from '../store/config';
+import { connect } from 'react-redux';
+import { searchContactsAction, orderContactsAction } from '../store';
 
-export default class ContactList extends PureComponent {
-  state = {
-    searchRegex: null,
-    orderByField: 'name',
-    orderByReverse: false
-  }
-  
+class ContactList extends PureComponent {  
   handleSearch = (searchTerm) => {
-    const regex = searchTerm ? new RegExp(searchTerm, 'gi') : null;
-    this.setState({
-      searchRegex: regex
-    });
+    this.props.searchContacts(searchTerm);
   }
 
   handleOrder = (field, reverse) => {
-    this.setState({
-      orderByField: field,
-      orderByReverse: reverse
-    });
+    this.props.orderContacts(field, reverse);
   }
 
   performSearch = (contact) => {
-    const { searchRegex } = this.state;
-    if (!searchRegex) return true;
+    const { searchTerm } = this.props;
+    if (!searchTerm) return true;
+
+    this.searchRegex = new RegExp(searchTerm, 'gi');
 
     for (const field of SearchFields) {
-      if (searchRegex.test(contact[field])) {
+      if (this.searchRegex.test(contact[field])) {
         return true;
       }
     }
@@ -39,7 +31,7 @@ export default class ContactList extends PureComponent {
   }
 
   performOrder = (a, b) => {
-    const { orderByField, orderByReverse } = this.state;
+    const { orderByField, orderByReverse } = this.props;
     if (!orderByField) return 0;
 
     const order = orderByReverse ? [-1,1] : [1,-1];
@@ -48,13 +40,12 @@ export default class ContactList extends PureComponent {
 
 
   render() {
-    const { contacts } = this.props;
-    const { searchRegex, orderByField, orderByReverse } = this.state;
+    const { contacts, searchTerm, orderByField, orderByReverse } = this.props;
 
     return (
       <div className="contact-list">
         <section className="top-section">
-          <SearchField placeholder="Search contacts..." onSearch={this.handleSearch}/>
+          <SearchField value={searchTerm} placeholder="Search contacts..." onSearch={this.handleSearch}/>
           <OrderBy field={orderByField} reverse={orderByReverse} onOrder={this.handleOrder}/>
         </section>
         {
@@ -63,7 +54,7 @@ export default class ContactList extends PureComponent {
               contacts.filter(this.performSearch).sort(this.performOrder).map((contact, i) => {
                 return (
                   <li key={contact.identifier}>
-                    <ContactListItem index={i} contact={contact} highlightRegex={searchRegex}/>
+                    <ContactListItem index={i} contact={contact} highlightRegex={this.searchRegex}/>
                   </li>
                 )
               })
@@ -74,3 +65,29 @@ export default class ContactList extends PureComponent {
     )
   }
 }
+
+const mapStateToProps = state => {
+  return {
+      searchTerm: state.contacts.searchTerm,
+      orderByField: state.contacts.orderBy.field,
+      orderByReverse: state.contacts.orderBy.reverse
+  }
+};
+
+const mapDispatchToProps = dispatch => {
+  return {
+      searchContacts: (searchTerm) => {
+          dispatch(searchContactsAction(searchTerm));
+      },
+      orderContacts: (orderByField, orderByReverse) => {
+        dispatch(orderContactsAction({ field: orderByField, reverse: orderByReverse }));
+      }
+  }
+};
+
+const ContactListContainer = connect(
+  mapStateToProps,
+  mapDispatchToProps
+)(ContactList);
+
+export default ContactListContainer;

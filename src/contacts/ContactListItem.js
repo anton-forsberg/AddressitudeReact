@@ -16,8 +16,7 @@ const Container = posed.div({
 
 const Text = posed.div({
   expanded: { 
-    opacity: 1,
-    maxHeight: 'none'
+    opacity: 1
   },
   minimized: {
     opacity: 0
@@ -25,10 +24,11 @@ const Text = posed.div({
 })
 
 class ContactListItem extends PureComponent {
-  state = { expanded: false }
-
   componentDidMount() {
-    this.setState({ expanded: true });
+    if (!this.props.contact.expanded) {
+      this.props.contact.expanded = true;
+      this.forceUpdate();
+    }
   }
 
   stopPropagation = e => {
@@ -40,11 +40,10 @@ class ContactListItem extends PureComponent {
   }
 
   render() {
-    const { expanded } = this.state;
     const { contact, highlightRegex, index } = this.props;
 
     return (
-      <Container className="contact-list-item" onClick={this.goToContactDetails} i={index + 1} pose={expanded ? 'expanded' : 'minimized'}>
+      <Container className="contact-list-item" onClick={this.goToContactDetails} i={index + 1} pose={contact.expanded ? 'expanded' : 'minimized'}>
         <img src={contact.picture} style={{borderColor: contact.color, backgroundColor: contact.color}} alt=""></img>
         <Text className="text">
           <h2><Highlight text={contact.name} regex={highlightRegex}/></h2>

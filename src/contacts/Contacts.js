@@ -17,12 +17,12 @@ class Contacts extends Component {
     return (
       <>
         <Switch>
-            <Route path="/contacts" exact component={() => (
-                <ContactList contacts={contacts}/>
-            )}/>
+            <Route path="/contacts" exact render={() => (
+                <ContactList contacts={contacts} />
+            )}></Route>
             <Route path="/contacts/:contactId" exact component={() => (
-                <ContactDetails contacts={contacts}/>
-            )}/>
+                <ContactDetails contacts={contacts} />
+            )}></Route>
         </Switch>
       </>
     )
