@@ -14,7 +14,7 @@
 importScripts("https://storage.googleapis.com/workbox-cdn/releases/3.6.3/workbox-sw.js");
 
 importScripts(
-  "/AddressitudeReact/precache-manifest.5f2fb328ba87a2c1c01a5c815bcc495c.js"
+  "/AddressitudeReact/precache-manifest.d356d0a9d1402251d29174f6314b76b1.js"
 );
 
 workbox.clientsClaim();
